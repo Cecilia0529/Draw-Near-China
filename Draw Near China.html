@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>丝路童行 · 绘见中国 | K12跨文化绘本</title>
+    <!-- Font Awesome 图标库（需联网） -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'Quicksand', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            background: #FFFCF5;
+            color: #2E2C2A;
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        :root {
+            --primary: #E36B3F;
+            --primary-dark: #C24D2A;
+            --secondary: #5B8C5A;
+            --cream: #FFF6E8;
+            --soft-gray: #F9F2E5;
+        }
+        /* 导航 */
+        .navbar {
+            background: #FFFCF5;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+            background-color: rgba(255,252,245,0.92);
+            border-bottom: 2px solid #FFE6CC;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #E36B3F, #F4A261);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .logo p {
+            font-size: 0.75rem;
+            color: #8B6B42;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #4A3726;
+            transition: 0.2s;
+        }
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        .btn-outline {
+            border: 2px solid var(--primary);
+            background: transparent;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 700;
+            color: var(--primary);
+            transition: 0.2s;
+            text-decoration: none;
+        }
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        /* 按钮 */
+        .btn-primary {
+            background: var(--primary);
+            border: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-block;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(227,107,63,0.2);
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        /* Hero 区域 */
+        .hero {
+            padding: 60px 0 40px;
+            background: linear-gradient(145deg, #FFF2E0 0%, #FFFCF5 100%);
+        }
+        .hero-grid {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+        .hero-text {
+            flex: 1;
+        }
+        .hero-text .badge {
+            background: #FFE0B5;
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #B45F2B;
+            margin-bottom: 20px;
+        }
+        .hero-text h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #5A4A36;
+            margin-bottom: 32px;
+        }
+        .hero-img {
+            flex: 0.9;
+            text-align: center;
+            background: #FFEDDA;
+            border-radius: 48px;
+            padding: 20px;
+        }
+        .hero-img i {
+            font-size: 12rem;
+            color: #E8BC8E;
+        }
+        /* 通用章节 */
+        .section {
+            padding: 70px 0;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .section-sub {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 48px;
+            color: #6F5B47;
+            font-size: 1.1rem;
+        }
+        /* 痛点卡片 */
+        .problem-solution {
+            background: var(--soft-gray);
+            border-radius: 48px;
+            padding: 48px 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 20px;
+        }
+        .ps-card {
+            background: white;
+            border-radius: 32px;
+            padding: 28px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.05);
+        }
+        .ps-card i {
+            font-size: 2.4rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        .ps-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+        /* 绘本网格 */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 32px;
+            margin-top: 20px;
+        }
+        .book-card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #FCE6D0;
+        }
+        .book-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
+        }
+        .book-cover {
+            background: #FCE8D4;
+            padding: 32px 0;
+            text-align: center;
+            font-size: 4rem;
+            color: #C26A3E;
+        }
+        .book-info {
+            padding: 24px 20px 28px;
+        }
+        .book-info h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        .book-info p {
+            color: #6F5B47;
+            margin-bottom: 16px;
+        }
+        .tag {
+            background: #FFE0B5;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            color: #B45F2B;
+        }
+        /* 页脚 */
+        .footer {
+            background: #2E2C2A;
+            color: #EBD5B3;
+            padding: 40px 0;
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            .hero-text h1 { font-size: 2.2rem; }
+            .hero-img i { font-size: 6rem; }
+            .section-title { font-size: 1.8rem; }
+            .nav-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <h1>丝路童行·绘见中国</h1>
+                <p>Silk Road Young Storytellers</p>
+            </div>
+            <div class="nav-links">
+                <a href="#">首页</a>
+                <a href="#books">绘本系列</a>
+                <a href="#about">项目介绍</a>
+                <a href="#" class="btn-outline">探索更多</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <div class="badge">✨ 面向K12学习者的文化浸润绘本</div>
+                <h1>用英语讲好中国故事<br>让世界读懂丝路文明</h1>
+                <p>首创“纸质绘本+数字资源+教学服务”三位一体，填补全球跨文化教育空白。</p>
+                <a href="#books" class="btn-primary">📖 探索绘本系列</a>
+                <div class="hero-stats" style="display: flex; gap: 24px; margin-top: 32px;">
+                    <div><strong>500亿+</strong><br>全球K12教育市场</div>
+                    <div><strong>4大</strong><br>原创主题系列</div>
+                    <div><strong>30+</strong><br>跨文化教学工具</div>
+                </div>
+            </div>
+            <div class="hero-img">
+                <i class="fas fa-globe-asia"></i>
+                <p style="margin-top: 16px; color: #B45F2B;">连接丝路 · 童行未来</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- 项目介绍板块 -->
+    <div class="container" id="about">
+        <div class="problem-solution">
+            <div class="ps-card">
+                <i class="fas fa-chalkboard-user"></i>
+                <h3>市场痛点</h3>
+                <p>优质中国文化英语内容极度匮乏，现有资源语言难度失衡、文化表达刻板，难以适配海外青少年认知。</p>
+            </div>
+            <div class="ps-card">
+                <i class="fas fa-book-open"></i>
+                <h3>我们的使命</h3>
+                <p>为全球青少年提供优质的跨文化教育内容，让世界在阅读中理解中国，在互动中建立友谊。</p>
+            </div>
+            <div class="ps-card">
+                <i class="fas fa-handshake"></i>
+                <h3>社会价值</h3>
+                <p>每年预计覆盖数万名K12学习者，培育全球公民，赋能跨文化教学范式，助推民心相通。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 四个绘本板块 -->
+    <div class="section" id="books">
+        <div class="container">
+            <h2 class="section-title">📚 四大原创绘本系列</h2>
+            <p class="section-sub">融合语言学习与文化浸润，适配K12不同阶段，让中国故事可读、可听、可玩、可创。</p>
+            <div class="books-grid">
+                <!-- 节日之旅 -->
+                <div class="book-card">
+                    <div class="book-cover">
+                        <i class="fas fa-dragon"></i>
+                    </div>
+                    <div class="book-info">
+                        <h3>《节日之旅》</h3>
+                        <p>春节、端午、中秋……用趣味故事展现节日起源与习俗，中英双语对照，让孩子沉浸式体验中国节庆文化。</p>
+                        <span class="tag">🎉 传统节日</span>
+                    </div>
+                </div>
+                <!-- 智慧传说 -->
+                <div class="book-card">
+                    <div class="book-cover">
+                        <i class="fas fa-feather-alt"></i>
+                    </div>
+                    <div class="book-info">
+                        <h3>《智慧传说》</h3>
+                        <p>从《论语》《庄子》到民间智慧寓言，用儿童化英语表达传递先贤思想，启迪成长智慧。</p>
+                        <span class="tag">🧠 哲理故事</span>
+                    </div>
+                </div>
+                <!-- 现代奇迹 -->
+                <div class="book-card">
+                    <div class="book-cover">
+                        <i class="fas fa-train"></i>
+                    </div>
+                    <div class="book-info">
+                        <h3>《现代奇迹》</h3>
+                        <p>高铁、5G、航天工程……展现中国科技与社会进步，塑造新时代中国形象，激发未来梦想。</p>
+                        <span class="tag">🚀 科技成就</span>
+                    </div>
+                </div>
+                <!-- 生态童话 -->
+                <div class="book-card">
+                    <div class="book-cover">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="book-info">
+                        <h3>《生态童话》</h3>
+                        <p>熊猫保护、塞罕坝造林，用童话传递生态理念，呼应全球可持续发展，守护绿色家园。</p>
+                        <span class="tag">🌿 环保实践</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 数字资源与服务亮点 -->
+    <div class="section" style="background: var(--soft-gray);">
+        <div class="container">
+            <h2 class="section-title">🌐 不止绘本 · 立体化教育生态</h2>
+            <p class="section-sub">配套数字资源 + 教师培训 + 全球交流计划，让跨文化教学更简单、更生动。</p>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; margin-top: 24px;">
+                <div style="background: white; border-radius: 28px; padding: 24px; width: 260px; text-align: center;">
+                    <i class="fas fa-headphones" style="font-size: 2.5rem; color: var(--primary);"></i>
+                    <h3 style="margin-top: 12px;">双语配音</h3>
+                    <p>专业有声朗读，扫码即听</p>
+                </div>
+                <div style="background: white; border-radius: 28px; padding: 24px; width: 260px; text-align: center;">
+                    <i class="fas fa-chalkboard" style="font-size: 2.5rem; color: var(--primary);"></i>
+                    <h3 style="margin-top: 12px;">师资培训</h3>
+                    <p>标准化教学手册+工作坊</p>
+                </div>
+                <div style="background: white; border-radius: 28px; padding: 24px; width: 260px; text-align: center;">
+                    <i class="fas fa-globe" style="font-size: 2.5rem; color: var(--primary);"></i>
+                    <h3 style="margin-top: 12px;">丝路小使者计划</h3>
+                    <p>国际笔友·文化作品联展</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 丝路童行（Silk Road Young Storytellers） | 让世界听见中国故事</p>
+            <p style="margin-top: 8px; font-size: 0.8rem;">洛阳师范学院 · 外国语学院 荣誉出品</p>
+        </div>
+    </footer>
+</body>
+</html>
